@@ -41,20 +41,15 @@ typeset -gU cdpath fpath mailpath path
 #   $cdpath
 # )
 
+# Add Homebrew zsh-completions to $fpath.
+fpath=("/usr/local/share/zsh/site-functions" $fpath)
+
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
   $path
 )
-# source initialization files for specific programs (ls, vim, less, ...)
-if [ -d ~/.shell.d ]; then
-  for i in ~/.shell.d/*.on; do
-    if [ -r $i ]; then
-      . $i
-    fi
-  done
-  unset i
-fi
+
 #
 # Less
 #

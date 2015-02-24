@@ -10,14 +10,100 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
-## Zsh help
+#### Customize to your needs...
+### Zsh help
 # ref: caveats in $brew info zsh
 # and http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Accessing-On_002dLine-Help
 unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/helpfiles
-## Preferred editor for local and remote sessions
+
+### Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 fi
+
+### Environmental Variables
+## node.js
+# Set npm global install location
+export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
+
+## Pyenv
+# enable shims and autocompletion
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+# use Homebrew's directories rather than ~/.pyenv
+export PYENV_ROOT=/usr/local/opt/pyenv
+## Pyenv-virtualenv
+# enable auto-activation
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+## Amazon Web Services CLI
+# source completions
+source /usr/local/share/zsh/site-functions/_aws
+
+## Hub
+# alias hub as git - https://github.com/github/hub#aliasing
+eval "$(hub alias -s)"
+
+### Custom Paths
+### Rbenv - Ruby Version Manager
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+## GVM - Golang Version Manager - https://github.com/moovweb/gvm
+# Line originally appended to .zshrc by gvm/master/binscripts/gvm-installer:
+[[ -s "/Users/remy/.gvm/scripts/gvm" ]] && source "/Users/remy/.gvm/scripts/gvm"
+
+## Go - Golang
+# set system Go installed via Homebrew
+export GOPATH=/usr/local/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
+## Homebrew
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+### Functions
+
+## One-line MySQL Database and User creation
+# Source: http://www.commandlinefu.com/commands/view/12620/create-a-database-with-user-and-pass-without-hassle.
+# Usage: createdb `database` `database-user` `database-password`
+function createdb () { mysqladmin -u root -p create $1 && mysql -u root -p -e "GRANT ALL ON $1.* TO '$2'@'localhost' IDENTIFIED BY '$3';" ; }
+
+## Take
+# Create a new directory and change to it, will create intermediate directories as required.
+# Forked from Oh-My-ZSH
+# https://github.com/robbyrussell/oh-my-zsh/blob/958c8f439058c2c253434a0860d29bf6c11cd559/lib/functions.zsh
+function take() {
+  mkdir -p $1
+  cd $1
+}
+
+### Aliases
+## ls 
+# Return number of files are in current directory:
+alias lno='ls | wc -l'
+# Return 
+alias ll='ls -alhAFG'
+
+## Git
+alias gitlog='git log --oneline --decorate --graph'
+
+## Github
+# test github user authentication
+alias githubtest='ssh -T git@github.com'
+
+## Cache
+alias flushdns='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+
+## Password Generation
+# Generate rsa key pair with default parameters
+alias keygen='ssh-keygen -b 4096 -t rsa -f id_rsa -P ""'
+# Generate random password with safe character set
+# 16 characters
+alias 16pas='openssl rand -base64 16 |md5 |head -c16;echo'
+# 32 characters
+alias 32pas='openssl rand -base64 32 |md5 |head -c32;echo'
+
+## Vagrant
+alias vmshl='cd ~/webdev/vagrant-local && vagrant ssh'
