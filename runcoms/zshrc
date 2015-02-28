@@ -14,9 +14,9 @@ fi
 ### Zsh help
 # ref: caveats in $brew info zsh
 # and http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Accessing-On_002dLine-Help
-unalias run-help
-autoload run-help
-HELPDIR=/usr/local/share/zsh/helpfiles
+# unalias run-help
+# autoload run-help
+HELPDIR=/usr/local/share/zsh/help
 
 ### Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -25,8 +25,10 @@ fi
 
 ### Environmental Variables
 ## node.js
+# Set n node version management location
+export N_PREFIX=/opt/nodejs
 # Set npm global install location
-export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
+export NODE_PATH=/opt/nodejs/lib/node_modules
 
 ## Pyenv
 # enable shims and autocompletion
@@ -46,13 +48,6 @@ source /usr/local/share/zsh/site-functions/_aws
 eval "$(hub alias -s)"
 
 ### Custom Paths
-### Rbenv - Ruby Version Manager
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
-## GVM - Golang Version Manager - https://github.com/moovweb/gvm
-# Line originally appended to .zshrc by gvm/master/binscripts/gvm-installer:
-[[ -s "/Users/remy/.gvm/scripts/gvm" ]] && source "/Users/remy/.gvm/scripts/gvm"
 
 ## Go - Golang
 # set system Go installed via Homebrew
@@ -60,8 +55,17 @@ export GOPATH=/usr/local/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
+## GVM - Golang Version Manager - https://github.com/moovweb/gvm
+# Line originally appended to .zshrc by gvm/master/binscripts/gvm-installer:
+# [[ -s "/Users/remy/.gvm/scripts/gvm" ]] && source "/Users/remy/.gvm/scripts/gvm"
+export PATH=/Users/remy/.gvm/bin:$PATH
+
 ## Homebrew
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+# Path exported ahead of system by zprezto in ~/.zlogin
+# export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+#Remove duplicates from Path
+typeset -U PATH
 
 ### Functions
 
@@ -80,6 +84,10 @@ function take() {
 }
 
 ### Aliases
+## count
+# return count of piped in list
+alias cnt='wc -l'
+
 ## ls 
 # Return number of files are in current directory:
 alias lno='ls | wc -l'
@@ -96,6 +104,14 @@ alias githubtest='ssh -T git@github.com'
 ## Cache
 alias flushdns='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
+## Node and npm
+# List global installed packages
+alias ng='npm list -g --depth=0'
+# increase depth
+alias ng1='npm list -g --depth=1'
+alias ng2='npm list -g --depth=2'
+alias ng3='npm list -g --depth=3'
+
 ## Password Generation
 # Generate rsa key pair with default parameters
 alias keygen='ssh-keygen -b 4096 -t rsa -f id_rsa -P ""'
@@ -107,3 +123,7 @@ alias 32pas='openssl rand -base64 32 |md5 |head -c32;echo'
 
 ## Vagrant
 alias vmshl='cd ~/webdev/vagrant-local && vagrant ssh'
+
+## Zip and Unzip
+# Unzip all archives in current directory; remove archives.
+alias unzipall='unzip \*.zip; rm -rf *.zip;[[ -d __MACOSX ]] && rm -rf __MACOSX'
