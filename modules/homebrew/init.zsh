@@ -11,6 +11,15 @@ if [[ "$OSTYPE" != darwin* ]]; then
 fi
 
 #
+#
+#
+
+# Add Homebrew zsh-completions to $fpath.
+fpath=("/usr/local/share/zsh/site-functions" $fpath)
+# Reload the completion system ignore insecure directories.
+autoload -Uz compinit && compinit -i
+
+#
 # Aliases
 #
 
@@ -23,6 +32,7 @@ alias brews='brew search'
 alias brewu='brew upgrade'
 alias brewU='brew update && brew upgrade'
 alias brewx='brew remove'
+alias brewin='brew info'
 
 # Homebrew Cask
 alias cask='brew cask'
