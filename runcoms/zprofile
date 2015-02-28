@@ -41,11 +41,9 @@ typeset -gU cdpath fpath mailpath path
 #   $cdpath
 # )
 
-# Add Homebrew zsh-completions to $fpath.
-fpath=("/usr/local/share/zsh/site-functions" $fpath)
-
 # Set the list of directories that Zsh searches for programs.
 path=(
+  /opt/nodejs/{bin,lib/node_modules}
   /usr/local/{bin,sbin}
   $path
 )
