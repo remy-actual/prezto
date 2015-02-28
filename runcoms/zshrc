@@ -64,6 +64,10 @@ export PATH=/Users/remy/.gvm/bin:$PATH
 # Path exported ahead of system by zprezto in ~/.zlogin
 # export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
+## User scripts 
+# Append ~/bin to PATH
+export PATH=$PATH:$HOME/bin
+
 #Remove duplicates from Path
 typeset -U PATH
 
