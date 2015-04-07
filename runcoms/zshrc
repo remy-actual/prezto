@@ -43,22 +43,21 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 # source completions
 source /usr/local/share/zsh/site-functions/_aws
 
-## Hub
-# alias hub as git - https://github.com/github/hub#aliasing
-eval "$(hub alias -s)"
-
 ### Custom Paths
 
-## Go - Golang
-# set system Go installed via Homebrew
-export GOPATH=/usr/local/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
-
+### Go - Golang
 ## GVM - Golang Version Manager - https://github.com/moovweb/gvm
 # Line originally appended to .zshrc by gvm/master/binscripts/gvm-installer:
 # [[ -s "/Users/remy/.gvm/scripts/gvm" ]] && source "/Users/remy/.gvm/scripts/gvm"
 export PATH=/Users/remy/.gvm/bin:$PATH
+
+## set system Go installed via Homebrew
+# set $GOPATH and $PATH out of Homebrew 
+# version control under /usr/local
+export GOPATH=/opt/go
+export PATH=$PATH:$GOPATH/bin
+# Add Golang commands within Cellar to $PATH
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 ## Homebrew
 # Path exported ahead of system by zprezto in ~/.zlogin
@@ -98,12 +97,23 @@ alias lno='ls | wc -l'
 # Return 
 alias ll='ls -alhAFG'
 
-## Git
+### Git
+## Git commands
 alias gitlog='git log --oneline --decorate --graph'
-
+#
 ## Github
 # test github user authentication
 alias githubtest='ssh -T git@github.com'
+#
+## Hub for Github
+# alias hub as git - https://github.com/github/hub#aliasing
+eval "$(hub alias -s)"
+
+## Golang working directories
+# Work
+alias gowork='cd $GOPATH/src/rootandflow.com'
+# Practice
+alias goprac='cd $GOPATH/src/rootandflow.com/practice'
 
 ## Cache
 alias flushdns='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
