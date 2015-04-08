@@ -11,12 +11,25 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 #### Customize to your needs...
+### Solarized color palette
+## Set TERM to 256-colors in supported terminals
+if [ "$COLORTERM" = "gnome-terminal" ] || [ "$COLORTERM" = "xfce4-terminal" ]
+then
+	export TERM=xterm-256color
+elif [ "$COLORTERM" = "rxvt-xpm" ]
+then
+	export TERM=rxvt-256color
+fi
+
+## Set dircolors for ls command
+eval `dircolors ~/.dir_colors/ansi-universal`
+
 ### Zsh help
 # ref: caveats in $brew info zsh
 # and http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Accessing-On_002dLine-Help
-# unalias run-help
-# autoload run-help
-HELPDIR=/usr/local/share/zsh/help
+unalias run-help &>/dev/null
+autoload run-help
+HELPDIR=/usr/share/zsh/help
 
 ### Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -34,39 +47,26 @@ export NODE_PATH=/opt/nodejs/lib/node_modules
 # enable shims and autocompletion
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 # use Homebrew's directories rather than ~/.pyenv
-export PYENV_ROOT=/usr/local/opt/pyenv
+# export PYENV_ROOT=/usr/local/opt/pyenv
 ## Pyenv-virtualenv
 # enable auto-activation
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 ## Amazon Web Services CLI
 # source completions
-source /usr/local/share/zsh/site-functions/_aws
-
-## Hub
-# alias hub as git - https://github.com/github/hub#aliasing
-eval "$(hub alias -s)"
+# source /usr/local/share/zsh/site-functions/_aws
 
 ### Custom Paths
 
-## Go - Golang
-# set system Go installed via Homebrew
-export GOPATH=/usr/local/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
-
 ## GVM - Golang Version Manager - https://github.com/moovweb/gvm
 # Line originally appended to .zshrc by gvm/master/binscripts/gvm-installer:
-# [[ -s "/Users/remy/.gvm/scripts/gvm" ]] && source "/Users/remy/.gvm/scripts/gvm"
-export PATH=/Users/remy/.gvm/bin:$PATH
+[[ -s "/home/remy/.gvm/scripts/gvm" ]] && source "/home/remy/.gvm/scripts/gvm"
 
-## Homebrew
-# Path exported ahead of system by zprezto in ~/.zlogin
-# export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-
-## User scripts 
-# Append ~/bin to PATH
-export PATH=$PATH:$HOME/bin
+## Go - Golang
+# set system Go 
+# export GOPATH=/usr/local/go
+export PATH=$PATH:$GOPATH/bin
+# export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 #Remove duplicates from Path
 typeset -U PATH
@@ -91,6 +91,10 @@ function take() {
 ## count
 # return count of piped in list
 alias cnt='wc -l'
+
+## Hub
+# alias hub as git - https://github.com/github/hub#aliasing
+eval "$(hub alias -s)"
 
 ## ls 
 # Return number of files are in current directory:
