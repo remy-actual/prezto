@@ -100,10 +100,11 @@ alias ll='ls -alhAFG'
 ### Git
 ## Git commands
 alias gitlog='git log --oneline --decorate --graph'
+alias syncgit='git fetch src; git rebase src/master'
 #
 ## Github
 # test github user authentication
-alias githubtest='ssh -T git@github.com'
+alias testgithub='ssh -T git@github.com'
 #
 ## Hub for Github
 # alias hub as git - https://github.com/github/hub#aliasing
