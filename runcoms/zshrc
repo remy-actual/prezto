@@ -101,6 +101,7 @@ alias ll='ls -alhAFG'
 ## Git commands
 alias gitlog='git log --oneline --decorate --graph'
 alias syncgit='git fetch src; git rebase src/master'
+alias gits='git status'
 #
 ## Github
 # test github user authentication
