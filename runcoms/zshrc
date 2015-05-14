@@ -74,8 +74,8 @@ typeset -U PATH
 
 ## One-line MySQL Database and User creation
 # Source: http://www.commandlinefu.com/commands/view/12620/create-a-database-with-user-and-pass-without-hassle.
-# Usage: createdb `database` `database-user` `database-password`
-function createdb () { mysqladmin -u root -p create $1 && mysql -u root -p -e "GRANT ALL ON $1.* TO '$2'@'localhost' IDENTIFIED BY '$3';" ; }
+# Usage: mysqlcreatedb `database` `database-user` `database-password`
+function mysqlcreatedb () { mysqladmin -u root -p create $1 && mysql -u root -p -e "GRANT ALL ON $1.* TO '$2'@'localhost' IDENTIFIED BY '$3';" ; }
 
 ## Take
 # Create a new directory and change to it, will create intermediate directories as required.
