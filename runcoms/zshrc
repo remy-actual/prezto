@@ -97,6 +97,7 @@ alias lno='ls | wc -l'
 # Return 
 alias ll='ls -alhAFG'
 
+<<<<<<< HEAD
 ### Git
 ## Git commands
 alias gitlog='git log --oneline --decorate --graph'
