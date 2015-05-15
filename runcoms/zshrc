@@ -91,6 +91,10 @@ function take() {
 # return count of piped in list
 alias cnt='wc -l'
 
+## functions
+# list all functions
+alias listfunc='print -l ${(ok)functions}'
+
 ## ls 
 # Return number of files are in current directory:
 alias lno='ls | wc -l'
