@@ -33,6 +33,8 @@ source "$HOME/.ssh/api"
 export N_PREFIX=/opt/nodejs
 # Set npm global install location
 export NODE_PATH=/opt/nodejs/lib/node_modules
+# nolo = node local -- Use 'npm bin' to execute local project binaries 
+alias nolo='PATH=$(npm bin):$PATH'
 
 ## Pyenv
 # enable shims and autocompletion
