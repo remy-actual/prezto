@@ -24,6 +24,10 @@ if [[ -n $SSH_CONNECTION ]]; then
 fi
 
 ### Environmental Variables
+## API keys
+# Keep keys out of public dotfiles repo by sourcing from local file. 
+source "$HOME/.ssh/api"
+
 ## node.js
 # Set n node version management location
 export N_PREFIX=/opt/nodejs
