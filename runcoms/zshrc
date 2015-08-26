@@ -76,11 +76,20 @@ export PATH=$PATH:$HOME/bin
 #Remove duplicates from Path
 typeset -U PATH
 
-### Functions
+#### Functions
 
-## One-line MySQL Database and User creation
+### Node and npm
+## Install and save to package.json
+# Usage: $ndev package
+# Save to devDependencies 
+function ndev () { npm i $1 --save-dev} 
+# Save to Dependencies
+function ndps () { npm i $1 --save} 
+
+### MySQL and MariaDB
+## Create new database and user
 # Source: http://www.commandlinefu.com/commands/view/12620/create-a-database-with-user-and-pass-without-hassle.
-# Usage: mysqlcreatedb `database` `database-user` `database-password`
+# Usage: $mysqlcreatedb `database` `database-user` `database-password`
 function mysqlcreatedb () { mysqladmin -u root -p create $1 && mysql -u root -p -e "GRANT ALL ON $1.* TO '$2'@'localhost' IDENTIFIED BY '$3';" ; }
 
 ## Take
@@ -131,8 +140,14 @@ alias goprac='cd $GOPATH/src/rootandflow.com/practice'
 alias flushdns='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
 ## Node and npm
+# List installed (local) packages
+alias np0='npm list -g --depth=0'
+# increase depth
+alias np1='npm list -g --depth=1'
+alias np2='npm list -g --depth=2'
+alias np3='npm list -g --depth=3'
 # List global installed packages
-alias ng='npm list -g --depth=0'
+alias ng0='npm list -g --depth=0'
 # increase depth
 alias ng1='npm list -g --depth=1'
 alias ng2='npm list -g --depth=2'
