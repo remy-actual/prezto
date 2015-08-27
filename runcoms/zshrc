@@ -141,11 +141,11 @@ alias flushdns='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
 ## Node and npm
 # List installed (local) packages
-alias np0='npm list -g --depth=0'
+alias np0='npm list --depth=0'
 # increase depth
-alias np1='npm list -g --depth=1'
-alias np2='npm list -g --depth=2'
-alias np3='npm list -g --depth=3'
+alias np1='npm list --depth=1'
+alias np2='npm list --depth=2'
+alias np3='npm list --depth=3'
 # List global installed packages
 alias ng0='npm list -g --depth=0'
 # increase depth
