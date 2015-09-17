@@ -165,6 +165,21 @@ alias 32pas='openssl rand -base64 32 |md5 |head -c32;echo'
 ## Vagrant
 alias vmshl='cd ~/webdev/vagrant-local && vagrant ssh'
 
+## Vim
+# Pause and Return to Vim with 'Ctrl-Z'
+# http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
 ## Zip and Unzip
 # Unzip all archives in current directory; remove archives.
 alias unzipall='unzip \*.zip; rm -rf *.zip;[[ -d __MACOSX ]] && rm -rf __MACOSX'
