@@ -42,11 +42,11 @@ typeset -gU cdpath fpath mailpath path
 # )
 
 # Set the list of directories that Zsh searches for programs.
-path=(
-  /opt/nodejs/{bin,lib/node_modules}
-  /usr/local/{bin,sbin}
-  $path
-)
+# path=(
+#   /opt/nodejs/{bin,lib/node_modules}
+#   /usr/local/{bin,sbin}
+#   $path
+# )
 
 #
 # Less
