@@ -1,0 +1,16 @@
+### Functions
+
+## One-line MySQL Database and User creation
+# Source: http://www.commandlinefu.com/commands/view/12620/create-a-database-with-user-and-pass-without-hassle.
+# Usage: createdb `database` `database-user` `database-password`
+function createdb () { mysqladmin -u root -p create $1 && mysql -u root -p -e "GRANT ALL ON $1.* TO '$2'@'localhost' IDENTIFIED BY '$3';" ; }
+
+## Take
+# Create a new directory and change to it, will create intermediate directories as required.
+# Forked from Oh-My-ZSH
+# https://github.com/robbyrussell/oh-my-zsh/blob/958c8f439058c2c253434a0860d29bf6c11cd559/lib/functions.zsh
+function take() {
+  mkdir -p $1
+  cd $1
+}
+

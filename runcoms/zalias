@@ -1,0 +1,45 @@
+### Aliases
+## count
+# return count of piped in list
+alias cnt='wc -l'
+
+## ls 
+# Return number of files are in current directory:
+alias lno='ls | wc -l'
+# Return 
+alias ll='ls -alhAFG'
+
+## Git
+alias gitlog='git log --oneline --decorate --graph'
+
+## Github
+# test github user authentication
+alias githubtest='ssh -T git@github.com'
+
+## Cache
+alias flushdns='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+
+## Node and npm
+# List global installed packages
+alias ng='npm list -g --depth=0'
+# increase depth
+alias ng1='npm list -g --depth=1'
+alias ng2='npm list -g --depth=2'
+alias ng3='npm list -g --depth=3'
+
+## Password Generation
+# Generate rsa key pair with default parameters
+alias keygen='ssh-keygen -b 4096 -t rsa -f id_rsa -P ""'
+# Generate random password with safe character set
+# 16 characters
+alias 16pas='openssl rand -base64 16 |md5 |head -c16;echo'
+# 32 characters
+alias 32pas='openssl rand -base64 32 |md5 |head -c32;echo'
+
+## Vagrant
+alias vmshl='cd ~/webdev/vagrant-local && vagrant ssh'
+
+## Zip and Unzip
+# Unzip all archives in current directory; remove archives.
+alias unzipall='unzip \*.zip; rm -rf *.zip;[[ -d __MACOSX ]] && rm -rf __MACOSX'
+
