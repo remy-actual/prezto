@@ -1,7 +1,7 @@
 #
 # A two-line, Powerline-inspired theme that displays contextual information.
 # Perpetual is forked from Paradox, which in turn was forked from Agnoster. 
-# This theme adds support for gvm_prompt, displaying the active Golang version.
+# This theme indicates when a goenv development environment is active.
 #
 # This theme requires a patched Powerline font, get them from
 # https://github.com/Lokaltog/powerline-fonts.
@@ -49,14 +49,15 @@ function prompt_paradox_end_segment {
 }
 
 function prompt_paradox_build_prompt {
-  prompt_paradox_start_segment black default '%(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)%F{blue}%n%F{red}@%F{green}%m%f'
-  prompt_paradox_start_segment magenta white '$_prompt_paradox_pwd'
+	prompt_paradox_start_segment black default '%(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)%F{blue}%n%F{red}@%F{green}%m%f'
+	prompt_paradox_start_segment magenta white '$_prompt_paradox_pwd'
 
-  prompt_paradox_start_segment blue black '$(gvm-prompt "(%s)")'
+	if which goenv > /dev/null && [[ -n $GOENV ]]; then
+	prompt_paradox_start_segment blue white "⚙ "; fi
 
-  if [[ -n "$git_info" ]]; then
-    prompt_paradox_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
-  fi
+	if [[ -n "$git_info" ]]; then
+		prompt_paradox_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
+	fi
 
   prompt_paradox_end_segment
 }
