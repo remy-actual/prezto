@@ -1,16 +1,45 @@
 ### Functions
 
+### Node and npm
+## Install and save to package.json
+# Usage: $ndev package
+# Save to devDependencies 
+function ndev () { npm i $1 --save-dev} 
+# Save to Dependencies
+function ndps () { npm i $1 --save} 
+
 ## One-line MySQL Database and User creation
 # Source: http://www.commandlinefu.com/commands/view/12620/create-a-database-with-user-and-pass-without-hassle.
 # Usage: createdb `database` `database-user` `database-password`
-function createdb () { mysqladmin -u root -p create $1 && mysql -u root -p -e "GRANT ALL ON $1.* TO '$2'@'localhost' IDENTIFIED BY '$3';" ; }
+
+createdb () { mysqladmin -u root -p create $1 && mysql -u root -p -e\
+ "GRANT ALL ON $1.* TO '$2'@'localhost' IDENTIFIED BY '$3';" ; }
 
 ## Take
-# Create a new directory and change to it, will create intermediate directories as required.
+# Make new directory -- including intermediate directories -- and immediately 
+# change it to the new working directory. 
 # Forked from Oh-My-ZSH
 # https://github.com/robbyrussell/oh-my-zsh/blob/958c8f439058c2c253434a0860d29bf6c11cd559/lib/functions.zsh
-function take() {
+
+take() {
   mkdir -p $1
   cd $1
 }
+
+## Fancy Ctrl-Z
+# Use Ctrl-Z to suspend Vim process, then return with Ctrl-Z too
+# (instead of 'fg' at command line)
+# Source: https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
 
