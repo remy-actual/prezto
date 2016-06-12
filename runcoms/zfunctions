@@ -6,7 +6,7 @@
 # Save to devDependencies 
 function ndev () { npm i $1 --save-dev} 
 # Save to Dependencies
-function ndps () { npm i $1 --save} 
+function ndep () { npm i $1 --save} 
 
 ## One-line MySQL Database and User creation
 # Source: http://www.commandlinefu.com/commands/view/12620/create-a-database-with-user-and-pass-without-hassle.
