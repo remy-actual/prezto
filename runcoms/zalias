@@ -64,6 +64,10 @@ alias np1='npm list --depth=1'
 alias np2='npm list --depth=2'
 alias np3='npm list --depth=3'
 
+## Sed
+# alias noglob to prevent shell expansion
+alias sed='noglob sed'
+
 ## Tree
 # add number to limit recursive levels
 alias tree2='tree -L 2'
