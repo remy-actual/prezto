@@ -77,3 +77,5 @@ typeset -U PATH
 source "${HOME}/.zfunctions"
 source "${HOME}/.zalias"
 
+# Check for iTerm2 and source Shell Integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
