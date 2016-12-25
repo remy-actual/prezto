@@ -6,6 +6,9 @@ alias cz='cd -P'
 # return count of piped in list
 alias count='wc -l'
 
+# Drakon editor
+alias drakon='tclsh /Users/remy/pro/src/sourceforge.net/drakon-editor/drakon_editor1.27/drakon_editor.tcl'
+
 # Split PATH into its elements and list in order
 alias elPATH='echo $PATH | tr ":" "\n"'
 
@@ -22,7 +25,7 @@ alias 32pas='openssl rand -base64 32 |md5 |head -c32;echo'
 # list all functions
 alias listfunc='print -l ${(ok)functions}'
 
-## ls 
+## ls
 # Return number of files in working directory:
 alias lno='ls | wc -l'
 # Prefered list of working directory contents
@@ -50,7 +53,7 @@ alias flushdns='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 alias metasploit='/opt/metasploit-framework/bin/msfconsole'
 
 ## Node and npm
-# nolo = node local -- Use 'npm bin' to execute local project binaries 
+# nolo = node local -- Use 'npm bin' to execute local project binaries
 alias nolo='PATH=$(npm bin):$PATH'
 
 # List global installed packages
