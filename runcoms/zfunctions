@@ -1,12 +1,27 @@
 ### Functions
 
+## cp
+# make multiple copies of a single file, appending given sequence
+# e.g. cpez index.html 01 03
+# ls
+# index.html
+# index01.html
+# index02.html
+# index03.html
+
+function cpez () {
+  for i in {$3..$4}
+  do cp $1.$2 $1-$i.$2
+  done
+  }
+
 ### Node and npm
 ## Install and save to package.json
 # Usage: $ndev package
-# Save to devDependencies 
-function ndev () { npm i $1 --save-dev} 
+# Save to devDependencies
+function ndev () { npm i $1 --save-dev}
 # Save to Dependencies
-function ndep () { npm i $1 --save} 
+function ndep () { npm i $1 --save}
 
 ## One-line MySQL Database and User creation
 # Source: http://www.commandlinefu.com/commands/view/12620/create-a-database-with-user-and-pass-without-hassle.
@@ -16,8 +31,8 @@ createdb () { mysqladmin -u root -p create $1 && mysql -u root -p -e\
  "GRANT ALL ON $1.* TO '$2'@'localhost' IDENTIFIED BY '$3';" ; }
 
 ## Take
-# Make new directory -- including intermediate directories -- and immediately 
-# change it to the new working directory. 
+# Make new directory -- including intermediate directories -- and immediately
+# change it to the new working directory.
 # Forked from Oh-My-ZSH
 # https://github.com/robbyrussell/oh-my-zsh/blob/958c8f439058c2c253434a0860d29bf6c11cd559/lib/functions.zsh
 
