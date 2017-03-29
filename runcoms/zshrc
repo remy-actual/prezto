@@ -29,6 +29,11 @@ fi
 # Keep keys out of public dotfiles repo by sourcing from local file. 
 source "$HOME/.credentials"
 
+## Neo4j Graph Database
+# Set application home
+# export NEO4J_HOME="${HOME}/.neo4j"
+# export NEO4J_HOME="/usr/local/Cellar/neo4j/3.0.7"
+
 ## node.js
 # Set n node version management location
 export N_PREFIX="${HOME}/.node"
@@ -60,6 +65,11 @@ if which hub > /dev/null; then eval "$(hub alias -s)"; fi
 [[ "$(which go)" = "$(brew --prefix)/bin/go" ]] && \
 	export GOPATH="${HOME}/pro" && \
 	path=("${GOPATH}/bin" "$(brew --prefix)/opt/go/libexec/bin" $path)
+
+## Google Cloud SDK
+# brew cask command completions
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zs'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 ## Node
 # Check for nodejs installed with N version manager
