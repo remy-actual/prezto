@@ -11,3 +11,82 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+### Zsh help
+# ref: caveats in $brew info zsh
+# and http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Accessing-On_002dLine-Help
+# unalias run-help
+# autoload run-help
+HELPDIR=/usr/local/share/zsh/help
+
+### Preferred editor for local and remote sessions
+if [[ -n ${SSH_CONNECTION} ]]; then
+  export EDITOR='vim'
+fi
+
+### Environmental Variables
+#
+## API keys
+# Keep keys out of public dotfiles repo by sourcing from local file. 
+source "$HOME/.credentials"
+
+## Neo4j Graph Database
+# Set application home
+# export NEO4J_HOME="${HOME}/.neo4j"
+# export NEO4J_HOME="/usr/local/Cellar/neo4j/3.0.7"
+
+## node.js
+# Set n node version management location
+export N_PREFIX="${HOME}/.node"
+# Set npm global install location
+export NODE_PATH="${HOME}/.node/lib/node_modules"
+
+## Pyenv
+# enable shims and autocompletion
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+# use Homebrew's directories rather than ~/.pyenv
+export PYENV_ROOT="/usr/local/opt/pyenv"
+## Pyenv-virtualenv
+# enable auto-activation
+if which pyenv-virtualenv-init > /dev/null
+then eval "$(pyenv virtualenv-init -)"; fi
+
+## Amazon Web Services CLI
+# source completions
+# source /usr/local/share/zsh/site-functions/_aws
+
+## Hub
+# alias hub as git - https://github.com/github/hub#aliasing
+if which hub > /dev/null; then eval "$(hub alias -s)"; fi
+
+### Custom Paths
+
+## Go - Golang
+# set system Go installed via Homebrew
+[[ "$(which go)" = "$(brew --prefix)/bin/go" ]] && \
+	export GOPATH="${HOME}/pro" && \
+	path=("${GOPATH}/bin" "$(brew --prefix)/opt/go/libexec/bin" $path)
+
+## Google Cloud SDK
+# brew cask command completions
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+
+## Node
+# Check for nodejs installed with N version manager
+[[ $(n -V) ]] && path=(${HOME}/.node/{bin,lib/node_modules} $path)
+
+### Ruby
+## Version Management with rbenv
+# Initialize; add to PATH
+[[ -L "$(brew --prefix)/bin/rbenv" ]] && \
+	eval "$(rbenv init -)" && path=(${HOME}/.rbenv/bin $path)
+
+#Remove duplicates from Path
+typeset -U PATH
+
+source "${HOME}/.zfunctions"
+source "${HOME}/.zalias"
+
+# Check for iTerm2 and source Shell Integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
